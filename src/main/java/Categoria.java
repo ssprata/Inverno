@@ -18,6 +18,14 @@ public class Categoria {
     public LinkedList<Produto> getProdutos() {
         return produtos;
     }
+    public Produto getProduto(String nome){
+        for(Produto p : produtos){
+            if(p.getNome().equals(nome)){
+                return p;
+            }
+        }
+        throw new IllegalArgumentException("Produto não existente");
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -36,10 +44,28 @@ public class Categoria {
 
     public void addProduto(Produto produto){
         for(Produto p : produtos){
-            if(p.getNome() == produto.getNome()){
+            if(p.getNome().equals(produto.getNome())){
                 throw new IllegalArgumentException("Produto não pode ter o mesmo nome que um já existente");
             }
         }
         produtos.add(produto);
+    }
+
+    public Produto removerProduto(Produto produto){
+        if(produtos.contains(produto)){
+            produtos.remove(produto);
+            return produto;
+        }
+        throw new IllegalArgumentException("Produto não existe");
+    }
+
+    public Produto removerProduto(String nome){
+        for(Produto p : produtos){
+            if(p.getNome().equals(nome)){
+                produtos.remove(p);
+                return p;
+            }
+        }
+        throw new IllegalArgumentException("Produto não existe");
     }
 }
